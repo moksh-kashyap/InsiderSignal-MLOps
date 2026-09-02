@@ -24,7 +24,7 @@ jobs:
       MYSQL_HOST: 127.0.0.1
       MYSQL_PORT: 3306
       MYSQL_USER: root
-      MYSQL_PASSWORD: ${{ secrets.MYSQL_ROOT_PASSWORD }}
+      MYSQL_ROOT_PASSWORD: ${{ secrets.MYSQL_ROOT_PASSWORD }}
       MYSQL_DATABASE: Insidersignal
 
     steps:
@@ -40,7 +40,7 @@ jobs:
       - name: Load schema
         run: |
           sudo apt-get install -y mysql-client
-          mysql -h 127.0.0.1 -P 3306 -u root -p"$MYSQL_PASSWORD" Insidersignal < schema.sql
+          mysql -h 127.0.0.1 -P 3306 -u root -p"$MYSQL_ROOT_PASSWORD" Insidersignal < schema.sql
 
       - name: Run tests
         run: pytest tests/ -v
