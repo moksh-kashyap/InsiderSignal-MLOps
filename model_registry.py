@@ -1,5 +1,6 @@
 # model_registry.py
 
+import os
 import joblib
 import json
 from datetime import datetime
@@ -18,6 +19,8 @@ def get_next_seq(conn):
 
 def register_model(model, metrics, features, hyperparams, conn, artifact_dir="models/"):
     version = f"v{datetime.now().strftime('%Y.%m.%d')}-{get_next_seq(conn)}"
+
+    os.makedirs(artifact_dir, exist_ok=True)
     artifact_path = f"{artifact_dir}{version}.joblib"
     joblib.dump(model, artifact_path)
 
